@@ -12,7 +12,7 @@ import Home from "./components/Home.vue";
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <Home msg="This is my Website" />
+  <Home msg="Hi, I'm William." />
 </template>
 
 <style scoped>
