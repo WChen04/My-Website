@@ -1,0 +1,16 @@
+{
+  "projects": [
+    {
+      "name": "Degree Doctor",
+      "img": "",
+      "description": " An online web app built to help students create and manage plans for their college degree. Save time planning on courses in one shot",
+      "index": 0
+    },
+    {
+      "name": "Study Buddy",
+      "img": "",
+      "description": " App that has a customizable avatar based on time worked. Save up coins based on time worked to upgrade your buddy",
+      "index": 1
+    }
+  ]
+}
