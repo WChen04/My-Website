@@ -3,7 +3,7 @@
     <div class="Navigation">
       <RouterLink to="/" id="Projects">Projects</RouterLink>
       <RouterLink to="/about" id="About">About</RouterLink>
-      <li id="NavBarOptions">Resume</li>
+      <RouterLink to="/" id="Resume">Resume</RouterLink>
     </div>
   </nav>
 </template>
@@ -17,12 +17,15 @@
   margin-bottom: 5em;
 }
 #About {
-  margin: 1em 5em;
+  margin: 1em 3em;
 }
 #Projects {
-  margin: 1em 5em;
+  margin: 1em 3em;
 }
-#NavBarOptions,
+#Resume {
+  margin: 1em 3em;
+}
+#Resume,
 #About,
 #Projects {
   color: hsla(159, 42%, 88%, 1);
@@ -30,7 +33,7 @@
   position: relative;
 }
 
-#NavBarOptions::after,
+#Resume::after,
 #About::after,
 #Projects::after {
   content: "";
@@ -45,7 +48,7 @@
   transition: transform 0.25s ease-out;
 }
 
-#NavBarOptions:hover::after,
+#Resume:hover::after,
 #About:hover::after,
 #Projects:hover::after {
   transform: scaleX(1);
