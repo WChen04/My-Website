@@ -8,7 +8,7 @@ import Contact from "./views/Contact.vue";
 
 <template>
   <Navbar />
-  <Home msg="Hi, I'm William." />
+  <Home msg="Hello, I'm William." />
   <RouterView />
 </template>
 
