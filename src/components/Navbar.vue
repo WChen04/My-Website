@@ -1,26 +1,38 @@
 <template>
-  <div class="Navigation">
-    <li><router-link to="/about">About</router-link></li>
-    <li>Resume</li>
-    <li><router-link to="/contact">Contact</router-link></li>
-  </div>
+  <nav>
+    <div class="Navigation">
+      <RouterLink to="/about" id="About">About</RouterLink>
+      <li id="NavBarOptions">Resume</li>
+      <RouterLink to="/" id="Projects">Projects</RouterLink>
+    </div>
+  </nav>
 </template>
 
 <style scoped>
 .Navigation {
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
   list-style-type: none;
   border-radius: 0.5em;
-  margin-bottom: 10em;
+  margin-bottom: 5em;
 }
-li {
+#About {
+  margin: 1em 5em;
+}
+#Projects {
+  margin: 1em 5em;
+}
+#NavBarOptions,
+#About,
+#Projects {
   color: hsla(159, 42%, 88%, 1);
   display: inline-block;
   position: relative;
 }
 
-li::after {
+#NavBarOptions::after,
+#About::after,
+#Projects::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -33,7 +45,9 @@ li::after {
   transition: transform 0.25s ease-out;
 }
 
-li:hover::after {
+#NavBarOptions:hover::after,
+#About:hover::after,
+#Projects:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }

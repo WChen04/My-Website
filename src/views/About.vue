@@ -1,3 +1,7 @@
 <template>
-  <h1>About me Page</h1>
+  <h1>Hey I'm William Chen!</h1>
 </template>
+
+<script>
+export default {};
+</script>

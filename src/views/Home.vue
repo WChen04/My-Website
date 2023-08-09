@@ -1,11 +1,9 @@
-<script setup>
-defineProps({
-  msg: String,
-});
+<script>
+export default {};
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>Hi, I'm William</h1>
 </template>
 
 <style scoped>

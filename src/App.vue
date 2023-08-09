@@ -2,14 +2,16 @@
 import { RouterView } from "vue-router";
 import Home from "./views/Home.vue";
 import Navbar from "./components/Navbar.vue";
-import About from "./views/About.vue";
-import Contact from "./views/Contact.vue";
 </script>
 
 <template>
   <Navbar />
-  <Home msg="Hi, I'm William." />
-  <RouterView />
+  <router-view />
 </template>
 
-<style scoped></style>
+<style scoped>
+#Nav {
+  display: flex;
+  padding: 30px;
+}
+</style>
