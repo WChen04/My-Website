@@ -1,9 +1,9 @@
 <template>
   <nav>
     <div class="Navigation">
+      <RouterLink to="/" id="Projects">Projects</RouterLink>
       <RouterLink to="/about" id="About">About</RouterLink>
       <li id="NavBarOptions">Resume</li>
-      <RouterLink to="/" id="Projects">Projects</RouterLink>
     </div>
   </nav>
 </template>
