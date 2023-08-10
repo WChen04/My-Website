@@ -1,7 +1,7 @@
 <template>
   <div class="maincontainer">
     <div id="Photo">
-      <img src="../../imgs/WebsitePhoto.png" id="MyPhoto" />
+      <img src="../../imgs/WebsitePhoto.jpeg" id="MyPhoto" />
       <iframe
         style="border-radius: 12px"
         src="https://open.spotify.com/embed/playlist/7l55725YpVuNPKIEKAjkZe?utm_source=generator”"
