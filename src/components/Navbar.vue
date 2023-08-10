@@ -1,10 +1,8 @@
 <template>
   <nav>
     <div class="Navigation">
-      <!-- <RouterLink to="/" id="Projects">Projects</RouterLink> -->
       <RouterLink to="/" id="About">About</RouterLink>
-      <a href="../../imgs/Resume.pdf" id="Resume">Resume</a>
-      <!-- <a href="../assets/Resume.pdf" id="Resume">Resume</a> -->
+      <a href="/Resume.pdf" id="Resume">Resume</a>
     </div>
   </nav>
 </template>
