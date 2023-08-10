@@ -1,20 +1,22 @@
 <template>
   <nav>
     <div class="Navigation">
-      <RouterLink to="/" id="Projects">Projects</RouterLink>
-      <RouterLink to="/about" id="About">About</RouterLink>
-      <RouterLink to="/" id="Resume">Resume</RouterLink>
+      <!-- <RouterLink to="/" id="Projects">Projects</RouterLink> -->
+      <RouterLink to="/" id="About">About</RouterLink>
+      <RouterLink to="/resume" id="Resume">Resume</RouterLink>
+      <!-- <a href="../assets/Resume.pdf" id="Resume">Resume</a> -->
     </div>
   </nav>
 </template>
 
 <style scoped>
 .Navigation {
-  display: inline-block;
+  /* display: inline-block; */
   justify-content: space-between;
   list-style-type: none;
   border-radius: 0.5em;
-  margin-bottom: 5em;
+  margin-bottom: 3em;
+  /* position: fixed; */
 }
 #About {
   margin: 1em 3em;
