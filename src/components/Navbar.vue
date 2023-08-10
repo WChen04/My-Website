@@ -3,7 +3,7 @@
     <div class="Navigation">
       <!-- <RouterLink to="/" id="Projects">Projects</RouterLink> -->
       <RouterLink to="/" id="About">About</RouterLink>
-      <RouterLink to="/resume" id="Resume">Resume</RouterLink>
+      <a href="../../imgs/Resume.pdf" id="Resume">Resume</a>
       <!-- <a href="../assets/Resume.pdf" id="Resume">Resume</a> -->
     </div>
   </nav>
