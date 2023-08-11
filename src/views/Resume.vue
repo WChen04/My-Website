@@ -1,11 +1,24 @@
 <script setup></script>
 
 <template>
-  <iframe src="../../imgs/Resume.pdf" width="1000" height="1100"></iframe>
+  <h1>hi</h1>
+  <div class="test">
+    <a :href="targetUrl">
+      <img :src="imageUrl" :alt="imageAlt" />
+    </a>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      targetUrl: "https://www.example.com",
+      imageUrl: require("@/imgs/Resume.pdf"), // Adjust the path as needed
+      imageAlt: "My Image",
+    };
+  },
+};
 </script>
 
 <style scoped>

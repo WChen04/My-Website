@@ -1,7 +1,7 @@
 <template>
   <nav>
     <div class="Navigation">
-      <RouterLink to="/" id="About">About</RouterLink>
+      <!-- <RouterLink to="/" id="About">About</RouterLink> -->
       <a href="/Resume.pdf" id="Resume">Resume</a>
     </div>
   </nav>
@@ -24,6 +24,7 @@
 }
 #Resume {
   margin: 1em 3em;
+  font-size: 1.5em;
 }
 #Resume,
 #About,
@@ -45,7 +46,7 @@
   left: 0;
   background-color: hsla(159, 42%, 88%, 1);
   transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.2s ease-out;
 }
 
 #Resume:hover::after,
