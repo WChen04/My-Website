@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       targetUrl: "https://www.example.com",
-      imageUrl: require("@/imgs/Resume.pdf"), // Adjust the path as needed
+      imageUrl: require("@/public/Resume.pdf"), // Adjust the path as needed
       imageAlt: "My Image",
     };
   },
