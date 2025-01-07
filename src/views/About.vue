@@ -14,7 +14,7 @@
       ></iframe>
     </div>
     <div id="AboutMe">
-      <h2>Hey, What's up? 👋</h2>
+      <h2>Hi, What's up? 👋</h2>
       <p>
         I'm William, a student currently studying Computer Science at Rensselaer
         Polytechnic Institute in Troy, NY. I am working on multiple projects but
