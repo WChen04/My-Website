@@ -8,12 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@duskmoon/vue3-typed-js": "^0.0.4",
-    "install": "^0.13.0",
-    "pnpm": "^8.6.12",
+    "three": "^0.176.0",
+    "troisjs": "^0.3.4",
+    "typed.js": "^2.1.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4",
-    "vue-typed-js": "^0.1.2"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
