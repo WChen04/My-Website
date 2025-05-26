@@ -5,7 +5,7 @@
       <div class="righthand">
         <a href="/">
           <img
-            src="/William Chen-logos2/William Chen-logos_white.png"
+            src="/WC_logos/WilliamChen-logos_white.png"
             alt="William Chen logo"
             class="logo"
           />
