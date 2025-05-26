@@ -165,7 +165,7 @@ onMounted(() => {
           { name: "Python", icon: "/tech/python.png" },
           { name: "HTML", icon: "/tech/html.png" },
         ],
-        gif: "src/assets/Hackathon.gif",
+        gif: new URL("/imgs/Hackathon.gif", import.meta.url).href,
         group: moonOrbit3,
         rotationAxis: "z",
         tilt: Math.PI / 4,
