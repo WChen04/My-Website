@@ -152,7 +152,7 @@ onMounted(() => {
           { name: "Tensorflow", icon: "/tech/tensorflow.png" },
           { name: "MediaPipe", icon: "/tech/mediapipe.png" },
         ],
-        gif: "/imgs/gesturo.gif",
+        gif: new URL("/imgs/gesturo.gif", import.meta.url).href,
         group: moonOrbit2,
         rotationAxis: "y",
         tilt: Math.PI / 4,
