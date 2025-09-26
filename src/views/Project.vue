@@ -9,11 +9,22 @@
         </div>
         <div v-else key="project" class="info-content">
           <div class="project-visual">
-            <div v-if="isGifLoading" class="gif-skeleton"></div>
+            <div v-if="isMediaLoading" class="gif-skeleton"></div>
+            <video
+              v-else-if="currentVideoSrc"
+              :src="currentVideoSrc"
+              :key="currentGifKey + '-v'"
+              class="project-gif"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="auto"
+            />
             <img
               v-else-if="currentGifSrc"
               :src="currentGifSrc"
-              :key="currentGifKey"
+              :key="currentGifKey + '-i'"
               alt="Project preview"
               class="project-gif"
               decoding="async"
@@ -73,7 +84,8 @@ import Ball from "../components/Ball.vue";
 const canvasContainer = ref(null);
 const selectedProject = ref(null);
 const currentGifSrc = ref(null);
-const isGifLoading = ref(false);
+const currentVideoSrc = ref(null);
+const isMediaLoading = ref(false);
 const currentGifKey = ref(0);
 
 const textureLoader = new THREE.TextureLoader();
@@ -194,25 +206,65 @@ onMounted(() => {
       }
     });
 
-    // Swap GIF source only after it has loaded to avoid showing previous GIF
+    // Swap media only after it has loaded to avoid showing previous item
     watch(
       selectedProject,
       (proj) => {
         if (!proj) {
           currentGifSrc.value = null;
+          currentVideoSrc.value = null;
           return;
         }
-        isGifLoading.value = true;
-        const preload = new Image();
-        preload.decoding = "async";
-        preload.loading = "eager";
-        preload.src = proj.gif;
-        preload.onload = () => {
-          // append a tiny cache-buster to force restart of animation
-          currentGifSrc.value = `${proj.gif}?v=${Date.now()}`;
-          currentGifKey.value += 1;
-          isGifLoading.value = false;
-        };
+        isMediaLoading.value = true;
+
+        const mp4 = proj.gif.replace(/\.gif($|\?)/, ".mp4$1");
+        const webm = proj.gif.replace(/\.gif($|\?)/, ".webm$1");
+
+        const tryVideo = (src) =>
+          new Promise((resolve, reject) => {
+            const v = document.createElement("video");
+            v.preload = "auto";
+            v.muted = true;
+            v.loop = true;
+            v.autoplay = true;
+            v.src = src + "?v=" + Date.now();
+            v.oncanplaythrough = () => resolve(src + "?v=" + Date.now());
+            v.onerror = reject;
+          });
+
+        const tryImage = (src) =>
+          new Promise((resolve, reject) => {
+            const preload = new Image();
+            preload.decoding = "async";
+            preload.loading = "eager";
+            preload.src = src;
+            preload.onload = () => resolve(src + "?v=" + Date.now());
+            preload.onerror = reject;
+          });
+
+        (async () => {
+          try {
+            let chosen = null;
+            try {
+              chosen = await tryVideo(webm);
+              currentVideoSrc.value = chosen;
+              currentGifSrc.value = null;
+            } catch {
+              try {
+                chosen = await tryVideo(mp4);
+                currentVideoSrc.value = chosen;
+                currentGifSrc.value = null;
+              } catch {
+                chosen = await tryImage(proj.gif);
+                currentVideoSrc.value = null;
+                currentGifSrc.value = chosen;
+              }
+            }
+            currentGifKey.value += 1;
+          } finally {
+            isMediaLoading.value = false;
+          }
+        })();
       },
       { immediate: false }
     );
