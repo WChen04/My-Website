@@ -9,8 +9,11 @@
         </div>
         <div v-else key="project" class="info-content">
           <div class="project-visual">
+            <div v-if="isGifLoading" class="gif-skeleton"></div>
             <img
-              :src="selectedProject.gif"
+              v-else-if="currentGifSrc"
+              :src="currentGifSrc"
+              :key="currentGifKey"
               alt="Project preview"
               class="project-gif"
               decoding="async"
@@ -64,11 +67,14 @@
 <script setup>
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Ball from "../components/Ball.vue";
 
 const canvasContainer = ref(null);
 const selectedProject = ref(null);
+const currentGifSrc = ref(null);
+const isGifLoading = ref(false);
+const currentGifKey = ref(0);
 
 const textureLoader = new THREE.TextureLoader();
 const moonTextures = [
@@ -187,6 +193,29 @@ onMounted(() => {
         img.src = proj.gif;
       }
     });
+
+    // Swap GIF source only after it has loaded to avoid showing previous GIF
+    watch(
+      selectedProject,
+      (proj) => {
+        if (!proj) {
+          currentGifSrc.value = null;
+          return;
+        }
+        isGifLoading.value = true;
+        const preload = new Image();
+        preload.decoding = "async";
+        preload.loading = "eager";
+        preload.src = proj.gif;
+        preload.onload = () => {
+          // append a tiny cache-buster to force restart of animation
+          currentGifSrc.value = `${proj.gif}?v=${Date.now()}`;
+          currentGifKey.value += 1;
+          isGifLoading.value = false;
+        };
+      },
+      { immediate: false }
+    );
 
     projects.forEach((proj, index) => {
       const moon = new THREE.Mesh(
@@ -342,6 +371,24 @@ p {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   overflow: hidden;
+}
+
+.gif-skeleton {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #1a2430 25%, #223142 37%, #1a2430 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 .project-gif {
