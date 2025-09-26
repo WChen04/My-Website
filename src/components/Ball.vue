@@ -29,6 +29,8 @@ onMounted(() => {
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(window.devicePixelRatio);
+  // Ensure correct color management for Three r176+
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
   container.value.appendChild(renderer.domElement);
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.9));
@@ -48,7 +50,7 @@ onMounted(() => {
 
   const textureLoader = new THREE.TextureLoader();
   textureLoader.load(props.imgUrl, (texture) => {
-    texture.encoding = THREE.sRGBEncoding;
+    texture.colorSpace = THREE.SRGBColorSpace;
 
     const iconGeometry = new THREE.CircleGeometry(0.6, 32);
     const iconMaterial = new THREE.MeshBasicMaterial({
