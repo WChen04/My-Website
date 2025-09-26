@@ -13,6 +13,9 @@
               :src="selectedProject.gif"
               alt="Project preview"
               class="project-gif"
+              decoding="async"
+              loading="eager"
+              fetchpriority="high"
             />
             <h2 class="project-title-overlay">{{ selectedProject.name }}</h2>
           </div>
@@ -174,6 +177,16 @@ onMounted(() => {
           "https://docs.google.com/presentation/d/1zk5lAR1Hq3bNVyU5E16s8disCJWG3-XUb5UxJ2PSntI/edit?slide=id.g1d124867081_0_1#slide=id.g1d124867081_0_1",
       },
     ];
+
+    // Preload GIFs so they render instantly on click
+    projects.forEach((proj) => {
+      if (proj.gif) {
+        const img = new Image();
+        img.decoding = "async";
+        img.loading = "eager";
+        img.src = proj.gif;
+      }
+    });
 
     projects.forEach((proj, index) => {
       const moon = new THREE.Mesh(
