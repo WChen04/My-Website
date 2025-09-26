@@ -13,16 +13,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  /* Height of one starfield segment; must equal star list span for seamless loop */
+  --starFieldSize: 2000px;
 }
 html {
   background: radial-gradient(#1b2735 0%, #090a0f 100%);
 }
 
 #stars {
-  z-index: -1;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 1px;
   height: 1px;
   background: transparent;
+  will-change: top, transform;
+  pointer-events: none;
   box-shadow: 1602px 661px #fff, 1779px 795px #fff, 1154px 812px #fff,
     1328px 800px #fff, 1262px 1251px #fff, 1976px 432px #fff, 1650px 1853px #fff,
     1001px 468px #fff, 609px 405px #fff, 1842px 1576px #fff, 742px 1365px #fff,
@@ -201,11 +208,13 @@ html {
     767px 706px #fff, 431px 334px #fff, 897px 15px #fff, 705px 146px #fff;
   animation: animStar 50s linear infinite;
 }
+/* Horizontal tiling to cover ultrawide screens */
+#stars:before,
 #stars:after {
-  z-index: -1;
+  z-index: 0;
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 0;
   width: 1px;
   height: 1px;
   background: transparent;
@@ -386,12 +395,18 @@ html {
     1006px 1085px #fff, 428px 1043px #fff, 1915px 1585px #fff, 232px 1935px #fff,
     767px 706px #fff, 431px 334px #fff, 897px 15px #fff, 705px 146px #fff;
 }
+#stars:before { left: -2000px; }
 
 #stars2 {
-  z-index: -1;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 2px;
   height: 2px;
   background: transparent;
+  will-change: top, transform;
+  pointer-events: none;
   box-shadow: 743px 879px #fff, 1145px 1260px #fff, 1412px 672px #fff,
     507px 1211px #fff, 52px 89px #fff, 1045px 256px #fff, 1022px 859px #fff,
     1520px 413px #fff, 1575px 604px #fff, 992px 877px #fff, 914px 960px #fff,
@@ -445,11 +460,12 @@ html {
     323px 1676px #fff, 1593px 1616px #fff;
   animation: animStar 100s linear infinite;
 }
+#stars2:before,
 #stars2:after {
-  z-index: -1;
+  z-index: 0;
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 0;
   width: 2px;
   height: 2px;
   background: transparent;
@@ -505,12 +521,18 @@ html {
     1126px 1916px #fff, 412px 592px #fff, 852px 732px #fff, 1060px 444px #fff,
     323px 1676px #fff, 1593px 1616px #fff;
 }
+#stars2:before { left: -2000px; }
 
 #stars3 {
-  z-index: -1;
+  z-index: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 3px;
   height: 3px;
   background: transparent;
+  will-change: top, transform;
+  pointer-events: none;
   box-shadow: 1703px 1208px #fff, 381px 207px #fff, 1516px 1990px #fff,
     1960px 982px #fff, 922px 1278px #fff, 689px 1766px #fff, 538px 554px #fff,
     802px 1529px #fff, 871px 1805px #fff, 228px 1830px #fff, 353px 186px #fff,
@@ -539,11 +561,12 @@ html {
     564px 455px #fff, 1675px 589px #fff;
   animation: animStar 150s linear infinite;
 }
+#stars3:before,
 #stars3:after {
-  z-index: -1;
+  z-index: 0;
   content: " ";
   position: absolute;
-  top: 2000px;
+  top: 0;
   width: 3px;
   height: 3px;
   background: transparent;
@@ -574,6 +597,7 @@ html {
     1067px 296px #fff, 746px 463px #fff, 412px 349px #fff, 1193px 1421px #fff,
     564px 455px #fff, 1675px 589px #fff;
 }
+#stars3:before { left: -2000px; }
 
 #title {
   position: absolute;
@@ -597,13 +621,45 @@ html {
 }
 
 @keyframes animStar {
-  from {
-    transform: translateY(0px);
-  }
-  to {
-    transform: translateY(-2000px);
+  0% { top: 0; }
+  50% { top: calc(-1 * var(--starFieldSize)); }
+  50.0001% { top: 0; }
+  100% { top: calc(-1 * var(--starFieldSize)); }
+}
+
+/* Position the duplicates: left original, right shifted by 2000px */
+#stars:after { left: 2000px; }
+#stars2:after { left: 2000px; }
+#stars3:after { left: 2000px; }
+
+/* Fallback for extremely wide displays (>6000px) */
+@media (min-width: 6001px) {
+  #stars,
+  #stars2,
+  #stars3 {
+    transform-origin: top left;
+    transform: scaleX(calc(100vw / 6000));
   }
 }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #stars,
+  #stars2,
+  #stars3 {
+    animation: none;
+  }
+}
+
+/* Stretch star field horizontally beyond 2000px, without shrinking on small screens */
+#stars,
+#stars2,
+#stars3 {
+  transform-origin: top left;
+  transform: none; /* disable stretching to avoid distortion */
+}
+
+/* (Intentionally no vertical bump: keeps loop seamless and prevents gaps) */
 
 body {
   margin: 0%;
